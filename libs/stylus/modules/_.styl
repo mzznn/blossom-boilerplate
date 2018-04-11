@@ -1,0 +1,39 @@
+body
+  background black
+
+.grid
+  display grid
+  grid-template-columns 50% 50%
+  @media (max-width: 600px)
+    grid-template-columns 100%
+
+#left-half
+  @media (max-width: 600px)
+    z-index 2
+
+#right-half
+  display grid
+  top 0
+  height 100vh
+  position sticky
+  box-sizing border-box
+  overflow hidden
+  transition background-color 0.4s ease
+  @media (max-width: 600px)
+    height 75vh
+
+.info, .projects
+  letter-spacing 0.4
+  a
+    color white
+    text-decoration underline
+    text-decoration-color pink
+    &:hover
+      color pink
+  li
+    margin-top 4px
+.info
+  padding 5%
+  p
+    color white
+    font-weight 400

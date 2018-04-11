@@ -1,0 +1,1 @@
+$(window).scroll(function(){var o=$(window),i=$("#right-half"),t=$(".panel"),l=o.scrollTop()+o.height()/3;t.each(function(){var o=$(this);o.position().top<=l&&o.position().top+o.height()>l&&(i.removeClass(function(o,i){return(i.match(/(^|\s)color-\S+/g)||[]).join(" ")}),i.addClass("color-"+$(this).data("color")))})}).scroll();
