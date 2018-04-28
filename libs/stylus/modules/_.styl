@@ -3,12 +3,14 @@ body
 
 .grid
   display grid
+  height 100vh
   grid-template-columns 50% 50%
   @media (max-width: 600px)
     grid-template-columns 100%
 
 #left-half
   @media (max-width: 600px)
+    height 25vh
     z-index 2
 
 #right-half
@@ -17,7 +19,6 @@ body
   height 100vh
   position sticky
   box-sizing border-box
-  overflow hidden
   transition background-color 0.4s ease
   @media (max-width: 600px)
     height 75vh
@@ -37,3 +38,34 @@ body
   p
     color white
     font-weight 400
+
+.main-carousel
+  min-height 100%
+
+.carousel-cell:nth-child(1) {
+  background-color: #FFC312;
+}
+.carousel-cell:nth-child(2) {
+  background-color: #F79F1F;
+}
+.carousel-cell:nth-child(3) {
+  background-color: #EE5A24;
+}
+.carousel-cell:nth-child(4) {
+  background-color: #EA2027;
+}
+.carousel-cell:nth-child(5) {
+  background-color: #C4E538;
+}
+.carousel-cell:nth-child(6) {
+  background-color: #A3CB38;
+}
+.carousel-cell:nth-child(7) {
+  background-color: #009432;
+}
+.carousel-cell:nth-child(8) {
+  background-color: #006266;
+}
+.carousel-cell:nth-child(9) {
+  background-color: #12CBC4;
+}
