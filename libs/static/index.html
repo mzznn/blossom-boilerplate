@@ -8,7 +8,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <link rel="icon" type="image/png" href="/assets/images/favicon.png"/>
     <link rel="stylesheet" href="/assets/css/blossom.css"/>
-    <link rel="stylesheet" href="/assets/css/flickity.css"/>
   </head>
   <body>
     <main>
@@ -17,41 +16,136 @@
           <div class="info">
             <p>Kilian Zelfo, Designer </p><br/>
             <p>Germany	</p>
-            <p>mail: 	<a href="mai&#108;&#116;o&#58;ki&#37;&#54;Ci&#97;%6E&#64;ze&#37;6Cfo&#46;co&#109;">kil&#105;an&#64;zel&#102;o&#46;com</a></p>
+            <p>mail: 	<a class="gradient" href="mai&#108;&#116;o&#58;ki&#37;&#54;Ci&#97;%6E&#64;ze&#37;6Cfo&#46;co&#109;">kil&#105;an&#64;zel&#102;o&#46;com</a></p>
             <p>phone: <span>+49 171 7732271</span></p>
           </div>
         </div>
         <div id="right-half">
-          <div class="main-carousel">
-            <div class="carousel-cell"></div>
-            <div class="carousel-cell"></div>
-            <div class="carousel-cell"></div>
-            <div class="carousel-cell"></div>
-            <div class="carousel-cell"></div>
-            <div class="carousel-cell"></div>
-            <div class="carousel-cell"></div>
-            <div class="carousel-cell"></div>
-            <div class="carousel-cell"></div>
-          </div>
+          <canvas></canvas>
         </div>
       </div>
     </main>
     <script src="//code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous"></script>
     <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js" integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30=" crossorigin="anonymous"></script>
     <script src="/assets/js/blossom.min.js"></script>
-    <script src="assets/js/flickity.pkgd.js"></script>
     <script>
-      $('.main-carousel').flickity({
-      cellAlign: 'center',
-      contain: true,
-      wrapAround: true,
-      prevNextButtons: false,
-      pageDots: false,
-      selectedAttraction: 0.1,
-      adaptiveHeight: true,
-      friction: 0.8,
-      autoPlay: 2500
+      $(document).ready(function(){
+        var c = $("canvas")[0];
+        /*var*/ gl = c.getContext("webgl");
+        gl.clearColor(1.0, 0.0, 0.0, 1.0);
+        gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+        
+        var vsh = gl.createShader(gl.VERTEX_SHADER);
+        gl.shaderSource(vsh, vsh_src());
+        gl.compileShader(vsh);
+        if(!gl.getShaderParameter(vsh, gl.COMPILE_STATUS)) {
+          alert(gl.getShaderInfoLog(vsh));
+        }
+        var fsh = gl.createShader(gl.FRAGMENT_SHADER);
+        gl.shaderSource(fsh, fsh_src());
+        gl.compileShader(fsh);
+        if(!gl.getShaderParameter(fsh, gl.COMPILE_STATUS)) {
+          alert(gl.getShaderInfoLog(fsh));
+        }
+        var prog = gl.createProgram();
+        gl.attachShader(prog, vsh);
+        gl.attachShader(prog, fsh);
+        gl.linkProgram(prog);
+        if(!gl.getProgramParameter(prog, gl.LINK_STATUS)) {
+          alert("Error: shader program");
+        }
+        gl.useProgram(prog);
+      
+        u_time = gl.getUniformLocation(prog, "u_time");
+      
+        var loc_pos = gl.getAttribLocation(prog, "a_position");
+        gl.enableVertexAttribArray(loc_pos);
+        var buf_v = gl.createBuffer();
+        gl.bindBuffer(gl.ARRAY_BUFFER, buf_v);
+        var v = [
+          -1.0,  1.0,  0.0,
+           1.0,  1.0,  0.0,
+           1.0, -1.0,  0.0,
+          -1.0,  1.0,  0.0,
+           1.0, -1.0,  0.0,
+          -1.0, -1.0,  0.0
+        ];
+        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(v), gl.STATIC_DRAW);
+        gl.bindBuffer(gl.ARRAY_BUFFER, buf_v);
+        gl.vertexAttribPointer(loc_pos, 3, gl.FLOAT, false, 0, 0);
+      
+        requestAnimationFrame(animatePlasma);
       });
+      
+      function animatePlasma(time){
+        requestAnimationFrame(animatePlasma);
+        gl.uniform1f(u_time, time);
+        gl.drawArrays(gl.TRIANGLES, 0, 6);
+      }
+      
+      function vsh_src(){
+        var src = `
+          attribute vec3 a_position;
+      
+          // Position sent to fragment shader.
+      	  varying vec3 v_position;
+      
+          void main(void) {
+            gl_Position = vec4(a_position, 1.0);
+            v_position = a_position;
+          }`;
+        
+        return src;
+      }
+      function fsh_src(){
+        var src = `
+          precision mediump float;
+          float TWOPI = 6.2832;
+      
+          uniform float u_time;
+      
+          // the position passed in from the vertex shader.
+      	  varying vec3 v_position;
+      
+          // Plasma points
+          vec2 p1 = vec2(-0.5);
+          vec2 p2 = vec2(-0.5, 0.5);
+          vec2 p3 = vec2(0.5, -0.5);
+          vec2 p4 = vec2(0.5);
+      
+          float calcDistance(vec2 p){
+            float d = length(p - p1);
+            d = min(d, length(p - p2));
+            d = min(d, length(p - p3));
+            d = min(d, length(p - p4));
+            return d;
+          }
+      
+          vec2 remap(vec2 v, float min_v, float max_v, float res_min, float res_max){
+            vec2 res = (v-min_v)/(max_v-min_v)*(res_max-res_min)+res_min;
+            return res;
+          }
+      
+          void main(void) {
+            vec2 c1 = remap(v_position.xy, -1.0, 1.0, 0.0, 1.0);
+            float m1 = mod(u_time/50000.0,1.0)*TWOPI;
+            float m2 = mod(u_time/20000.0,1.0)*TWOPI;
+            float m3 = mod(u_time/30000.0,1.0)*TWOPI;
+            float m4 = mod(u_time/10000.0,1.0)*TWOPI;
+            p1 += vec2(0.5,0.6)*vec2(sin(m1),cos(m1));
+            p2 += vec2(0.7,0.4)*vec2(sin(m2),cos(m2));
+            p3 += vec2(-0.5,0.5)*vec2(sin(m3),cos(m3));
+            p4 += vec2(0.5,0.7)*vec2(cos(m4),sin(m4));
+            vec2 c2 = remap(sin(c1*TWOPI)+vec2(sin(m1), sin(m2)), -2.0, 2.0, 0.0, 1.0);
+            vec3 color = vec3(c2, abs(sin(m3)));
+      
+            color = mix(color, vec3(0.0), calcDistance(v_position.xy)/1.5);
+            color *= exp(0.4);
+            gl_FragColor = vec4(color, 1.0);
+          }`;
+      
+        return src;
+      }
     </script>
   </body>
 </html>

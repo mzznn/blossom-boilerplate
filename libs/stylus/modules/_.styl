@@ -25,12 +25,6 @@ body
 
 .info, .projects
   letter-spacing 0.4
-  a
-    color white
-    text-decoration underline
-    text-decoration-color pink
-    &:hover
-      color pink
   li
     margin-top 4px
 .info
@@ -39,33 +33,68 @@ body
     color white
     font-weight 400
 
-.main-carousel
-  min-height 100%
+canvas
+  height 100%
+  width 100%
 
-.carousel-cell:nth-child(1) {
-  background-color: #FFC312;
-}
-.carousel-cell:nth-child(2) {
-  background-color: #F79F1F;
-}
-.carousel-cell:nth-child(3) {
-  background-color: #EE5A24;
-}
-.carousel-cell:nth-child(4) {
-  background-color: #EA2027;
-}
-.carousel-cell:nth-child(5) {
-  background-color: #C4E538;
-}
-.carousel-cell:nth-child(6) {
-  background-color: #A3CB38;
-}
-.carousel-cell:nth-child(7) {
-  background-color: #009432;
-}
-.carousel-cell:nth-child(8) {
-  background-color: #006266;
-}
-.carousel-cell:nth-child(9) {
-  background-color: #12CBC4;
-}
+.gradient {
+  background: linear-gradient(90deg, #e7040f, #ff725c, #ffb700, #d5008f, #ff80cc, #137752, #9eebcf, #00449e, #96ccff);
+  background-clip: border-box;
+  background-size: auto auto;
+  background-size: 1000% 1000%;
+  color: #000;
+  background-clip: text;
+  text-fill-color: transparent;
+-webkit-background-clip: text;
+  background-clip: text;
+-webkit-text-fill-color: transparent;
+
+  animation: Shine 10s ease infinite;
+  animation-name: Shine;
+  animation-duration: 10s;
+  animation-timing-function: ease;
+  animation-delay: 0s;
+  animation-direction: normal;
+  animation-fill-mode: none;
+  animation-iteration-count: infinite;
+  animation-play-state: running;
+
+
+-webkit-animation: Shine 10s ease infinite;
+  animation-name: Shine;
+  animation-duration: 10s;
+  animation-timing-function: ease;
+  animation-delay: 0s;
+  animation-direction: normal;
+  animation-fill-mode: none;
+  animation-iteration-count: infinite;
+  animation-play-state: running;
+
+-moz-animation: Shine 10s ease infinite;
+  animation-name: Shine;
+  animation-duration: 10s;
+  animation-timing-function: ease;
+  animation-delay: 0s;
+  animation-direction: normal;
+  animation-fill-mode: none;
+  animation-iteration-count: infinite;
+  animation-play-state: running;
+  }
+
+@keyframes Shine {
+  0%    {background-position:0% 50%}
+  50%   {background-position:100% 50%}
+  100%  {background-position:0% 50%}
+  }
+
+@-webkit-keyframes Shine {
+  0%    {background-position:0% 50%}
+  50%   {background-position:100% 50%}
+  100%  {background-position:0% 50%}
+  }
+
+@-moz-keyframes Shine {
+  0%    {background-position:0% 50%}
+  50%   {background-position:100% 50%}
+  100%  {background-position:0% 50%}
+  }
