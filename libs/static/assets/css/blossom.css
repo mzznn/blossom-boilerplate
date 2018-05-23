@@ -2448,6 +2448,7 @@ small {
 }
 body {
   background: #000;
+  font-family: 'Inter UI';
 }
 .grid {
   display: grid;
@@ -2486,22 +2487,18 @@ body {
 }
 .info,
 .projects {
+  font-size: 22px;
+  padding: 5%;
   letter-spacing: 0.4;
+}
+.info p,
+.projects p {
+  color: #fff;
+  font-weight: 400;
 }
 .info li,
 .projects li {
   margin-top: 4px;
-}
-.info {
-  padding: 5%;
-}
-.info p {
-  color: #fff;
-  font-weight: 400;
-}
-canvas {
-  height: 100%;
-  width: 100%;
 }
 .gradient {
   background: -webkit-linear-gradient(0deg, #e7040f, #ff725c, #ffb700, #d5008f, #ff80cc, #137752, #9eebcf, #00449e, #96ccff);
