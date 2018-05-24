@@ -2446,9 +2446,11 @@ small {
 .text.smoke {
   color: #e3e7eb;
 }
+@import url("https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400,600");
 body {
   background: #000;
-  font-family: 'Inter UI';
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-weight: 400;
 }
 .grid {
   display: grid;
@@ -2496,9 +2498,18 @@ body {
   color: #fff;
   font-weight: 400;
 }
+.info .headline,
+.projects .headline {
+  font-weight: 600;
+}
 .info li,
 .projects li {
   margin-top: 4px;
+}
+a.mail,
+a.mail:active,
+a.mail:visited {
+  color: #fff;
 }
 .gradient {
   background: -webkit-linear-gradient(0deg, #e7040f, #ff725c, #ffb700, #d5008f, #ff80cc, #137752, #9eebcf, #00449e, #96ccff);
