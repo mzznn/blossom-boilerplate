@@ -1,8 +1,7 @@
-@import url('https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400,600');
-
 body
-  background black
-  font-family 'IBM Plex Sans', sans-serif
+  background white
+  color black
+  font-family 'Fira Sans', sans-serif
   font-weight: 400
 
 .grid
@@ -13,35 +12,88 @@ body
     grid-template-columns 100%
 
 #left-half
+  p
+    font-size 18px
+    color black
   @media (max-width: 600px)
     height 25vh
     z-index 2
 
 #right-half
-  display grid
-  top 0
-  height 100vh
-  position sticky
-  box-sizing border-box
-  transition background-color 0.4s ease
+  transition 0.4s ease-in-out
   @media (max-width: 600px)
-    height 75vh
+    height 50vh
 
 .info, .projects
-  font-size 22px
   padding 5%
   letter-spacing 0.4
-  p
-    color white
-    font-weight 400
-  .headline
-      font-weight 600
   li
     margin-top 4px
 
-a.mail, a.mail:active, a.mail:visited
-  color white
-  
+.info
+  position sticky
+  left 0
+  top 0
+
+.projects
+  h1
+    color rgba(0, 0, 0, 0.8)
+    font-size 38px
+    line-height 54px
+  h2
+    color rgba(0, 0, 0, 0.4)
+    font-size 22px
+    line-height 28px
+
+  .headline
+    text-align center
+    font-size 38px
+    line-height 64px
+    font-weight 300
+    margin-bottom 40px
+  p
+    color rgba(0, 0, 0, 0.7)
+    margin 20px 0
+    font-size 18px
+
+  img.cover
+    width 100%
+    height auto
+    border-radius 4px
+
+/* panel styles */
+.panel {
+  /* min height incase content is higher than window height */
+  min-height 50vh
+  display: flex;
+}
+
+/* colours */
+.color-violet {
+  background-color: #7A4EAB;
+}
+.color-indigo {
+  background-color: #4332CF;
+}
+.color-blue {
+  background-color: #2F8FED;
+}
+.color-green {
+  background-color: #4DCF42;
+}
+.color-yellow {
+  background-color: #FAEB33;
+}
+.color-orange {
+  background-color: #F19031;
+}
+.color-red {
+  background-color: #F2293A;
+}
+.color-black {
+  background-color: #000;
+}
+
 .gradient {
   background: linear-gradient(90deg, #e7040f, #ff725c, #ffb700, #d5008f, #ff80cc, #137752, #9eebcf, #00449e, #96ccff);
   background-clip: border-box;

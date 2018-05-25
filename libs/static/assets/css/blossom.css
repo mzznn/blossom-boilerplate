@@ -2446,10 +2446,10 @@ small {
 .text.smoke {
   color: #e3e7eb;
 }
-@import url("https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400,600");
 body {
-  background: #000;
-  font-family: 'IBM Plex Sans', sans-serif;
+  background: #fff;
+  color: #000;
+  font-family: 'Fira Sans', sans-serif;
   font-weight: 400;
 }
 .grid {
@@ -2462,6 +2462,10 @@ body {
     grid-template-columns: 100%;
   }
 }
+#left-half p {
+  font-size: 18px;
+  color: #000;
+}
 @media (max-width: 600px) {
   #left-half {
     height: 25vh;
@@ -2469,47 +2473,91 @@ body {
   }
 }
 #right-half {
-  display: grid;
-  top: 0;
-  height: 100vh;
-  position: sticky;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  -webkit-transition: background-color 0.4s ease;
-  -moz-transition: background-color 0.4s ease;
-  -o-transition: background-color 0.4s ease;
-  -ms-transition: background-color 0.4s ease;
-  transition: background-color 0.4s ease;
+  -webkit-transition: 0.4s ease-in-out;
+  -moz-transition: 0.4s ease-in-out;
+  -o-transition: 0.4s ease-in-out;
+  -ms-transition: 0.4s ease-in-out;
+  transition: 0.4s ease-in-out;
 }
 @media (max-width: 600px) {
   #right-half {
-    height: 75vh;
+    height: 50vh;
   }
 }
 .info,
 .projects {
-  font-size: 22px;
   padding: 5%;
   letter-spacing: 0.4;
-}
-.info p,
-.projects p {
-  color: #fff;
-  font-weight: 400;
-}
-.info .headline,
-.projects .headline {
-  font-weight: 600;
 }
 .info li,
 .projects li {
   margin-top: 4px;
 }
-a.mail,
-a.mail:active,
-a.mail:visited {
-  color: #fff;
+.info {
+  position: sticky;
+  left: 0;
+  top: 0;
+}
+.projects h1 {
+  color: rgba(0,0,0,0.8);
+  font-size: 38px;
+  line-height: 54px;
+}
+.projects h2 {
+  color: rgba(0,0,0,0.4);
+  font-size: 22px;
+  line-height: 28px;
+}
+.projects .headline {
+  text-align: center;
+  font-size: 38px;
+  line-height: 64px;
+  font-weight: 300;
+  margin-bottom: 40px;
+}
+.projects p {
+  color: rgba(0,0,0,0.7);
+  margin: 20px 0;
+  font-size: 18px;
+}
+.projects img.cover {
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+}
+.panel {
+/* min height incase content is higher than window height */
+  min-height: 50vh;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: box;
+  display: flex;
+}
+.color-violet {
+  background-color: #7a4eab;
+}
+.color-indigo {
+  background-color: #4332cf;
+}
+.color-blue {
+  background-color: #2f8fed;
+}
+.color-green {
+  background-color: #4dcf42;
+}
+.color-yellow {
+  background-color: #faeb33;
+}
+.color-orange {
+  background-color: #f19031;
+}
+.color-red {
+  background-color: #f2293a;
+}
+.color-black {
+  background-color: #000;
 }
 .gradient {
   background: -webkit-linear-gradient(0deg, #e7040f, #ff725c, #ffb700, #d5008f, #ff80cc, #137752, #9eebcf, #00449e, #96ccff);
